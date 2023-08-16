@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -32,13 +33,16 @@ namespace BD
 
         private void cmdSelect(object sender, EventArgs e)
         {
+/*
                  String conString = @"Data Source=(LocalDB)\MSSQLLocalDB;
                                 AttachDbFilename=|DataDirectory|\APP_DATA\Database.mdf; 
                                 Integrated Security=True";
+*/
                 String sqlSelect = "select * from Cliente";
                 SqlConnection con;
            try
             {
+                String conString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                 using (con = new SqlConnection(conString))
                 {
                     con.Open(); // tenta abrir a conexão
