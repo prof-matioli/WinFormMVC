@@ -32,22 +32,24 @@ namespace BD
 
         private void cmdSelect(object sender, EventArgs e)
         {
-            try
-            {
-                String conString = @"Data Source=(LocalDB)\MSSQLLocalDB;
+                 String conString = @"Data Source=(LocalDB)\MSSQLLocalDB;
                                 AttachDbFilename=|DataDirectory|\APP_DATA\Database.mdf; 
                                 Integrated Security=True";
                 String sqlSelect = "select * from Cliente";
-
-                SqlConnection con = new SqlConnection(conString);
-                con.Open(); // tenta abrir a conexão
-                SqlCommand cmd = new SqlCommand(sqlSelect, con);
-                SqlDataReader sdr = cmd.ExecuteReader();
-                lstClientes.Items.Clear();
-                while(sdr.Read())
+                SqlConnection con;
+           try
+            {
+                using (con = new SqlConnection(conString))
                 {
-                    Console.WriteLine(sdr["nome"] + " | " + sdr["cpf_cnpj"] + "\n");
-                    lstClientes.Items.Add(sdr["nome"]);
+                    con.Open(); // tenta abrir a conexão
+                    SqlCommand cmd = new SqlCommand(sqlSelect, con);
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    lstClientes.Items.Clear();
+                    while (sdr.Read())
+                    {
+                        Console.WriteLine(sdr["nome"] + " | " + sdr["cpf_cnpj"] + "\n");
+                        lstClientes.Items.Add(sdr["nome"]);
+                    }
                 }
             }
             catch (SqlException ex)
