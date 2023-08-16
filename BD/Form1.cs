@@ -47,7 +47,7 @@ namespace BD
                 while(sdr.Read())
                 {
                     Console.WriteLine(sdr["nome"] + " | " + sdr["cpf_cnpj"] + "\n");
-                    lstClientes.Items.Add(String.Concat(sdr["nome"]));
+                    lstClientes.Items.Add(sdr["nome"]);
                 }
             }
             catch (SqlException ex)
