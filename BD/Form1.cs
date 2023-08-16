@@ -12,7 +12,7 @@ namespace BD
             InitializeComponent();
         }
 
-        private void cmdTestaConexao(object sender, EventArgs e)
+/*        private void cmdTestaConexao(object sender, EventArgs e)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace BD
                 MessageBox.Show("Falha geral do sistema!");
             }
         }
-
+*/
         private void cmdSelect(object sender, EventArgs e)
         {
 /*
@@ -42,6 +42,7 @@ namespace BD
                 SqlConnection con;
            try
             {
+                //Lê a string de conexão do arquivo de configuração da aplicação, App.config
                 String conString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                 using (con = new SqlConnection(conString))
                 {

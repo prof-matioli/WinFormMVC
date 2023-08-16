@@ -60,7 +60,7 @@ namespace BD
             this.Controls.Add(this.lstClientes);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Cadastro de CLIENTES";
             this.ResumeLayout(false);
 
         }
