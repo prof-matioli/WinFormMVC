@@ -74,13 +74,18 @@ namespace BD
 
         private void cmdSelecionou(object sender, EventArgs e)
         {
-            String nome="";
-            Int32 id;
- 
-            nome = this.lstClientes.GetItemText(this.lstClientes.SelectedItem);
+            //String nome="";
+            int id;
+
+            //pego os valores direto do Listbox
+            //nome = this.lstClientes.GetItemText(this.lstClientes.SelectedItem);
             id = Convert.ToInt32(this.lstClientes.SelectedValue);
 
-            Console.WriteLine("{0} - {1}",id,nome);
+            //Pesquiso o Cliente na DataTable, no DataSet, e crio uma DataRow com os 
+            //dados do Cliente
+            DataRow[] clientes = dsCliente.Tables["Cliente"].Select("idCliente="+id);
+            if(clientes!=null)
+                Console.WriteLine("{0} - {1} - {2}", clientes[0][0], clientes[0][1], clientes[0][2]);
         }
     }
 }
