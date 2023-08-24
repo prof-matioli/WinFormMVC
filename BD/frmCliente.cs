@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -7,6 +8,7 @@ namespace BD
 {
     public partial class frmCliente : Form
     {
+        DataSet dsCliente;
         public frmCliente()
         {
             InitializeComponent();
@@ -48,13 +50,16 @@ namespace BD
                 {
                     con.Open(); // tenta abrir a conexão
                     SqlCommand cmd = new SqlCommand(sqlSelect, con);
-                    SqlDataReader sdr = cmd.ExecuteReader();
-                    lstClientes.Items.Clear();
-                    while (sdr.Read())
-                    {
-                        Console.WriteLine(sdr["nome"] + " | " + sdr["cpf_cnpj"] + "\n");
-                        lstClientes.Items.Add(sdr["nome"]);
-                    }
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    dsCliente = new DataSet();
+                    da.Fill(dsCliente,"Cliente");
+                    DataTable dtCliente = dsCliente.Tables["Cliente"];
+
+                    // 1. seta DisplayMember and ValueMember
+                    lstClientes.DisplayMember = dtCliente.Columns["Nome"].ColumnName;
+                    lstClientes.ValueMember = dtCliente.Columns["idCliente"].ColumnName;
+                    // 2. seta DataSource
+                    lstClientes.DataSource = dtCliente;
                 }
             }
             catch (SqlException ex)
@@ -69,7 +74,13 @@ namespace BD
 
         private void cmdSelecionou(object sender, EventArgs e)
         {
+            String nome="";
+            Int32 id;
+ 
+            nome = this.lstClientes.GetItemText(this.lstClientes.SelectedItem);
+            id = Convert.ToInt32(this.lstClientes.SelectedValue);
 
+            Console.WriteLine("{0} - {1}",id,nome);
         }
     }
 }
