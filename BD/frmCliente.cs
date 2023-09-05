@@ -125,7 +125,42 @@ namespace BD
 
         private void cmdSalvar(object sender, EventArgs e)
         {
-            //procedimento de persistência em BD
+            SqlConnection con = new SqlConnection();
+            int linhasAfetadas = 0;
+            try
+            {
+                //Lê a string de conexão do arquivo de configuração da aplicação, App.config
+                   con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+ 
+                    //procedimento de persistência em BD
+                    string updateSql = String.Format("UPDATE Cliente SET " +
+                                        "Nome = @NOME, cpf_cnpj = @CPFCNPJ " +
+                                        "WHERE idCliente = @ID ");
+                    con.Open(); // tenta abrir a conexão
+                    SqlCommand cmd = new SqlCommand(updateSql,con);
+                    cmd.Parameters.Add(new SqlParameter("NOME", txtNome.Text));
+                    cmd.Parameters.Add(new SqlParameter("CPFCNPJ", txtCnpjCpf.Text));
+                    cmd.Parameters.Add(new SqlParameter("ID", idCliente.Text));
+
+                    linhasAfetadas = cmd.ExecuteNonQuery();
+                    if(linhasAfetadas>0) 
+                        MessageBox.Show("Dados atualizados com sucesso!","Aviso do sisema",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Falha ao atualizar dados!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+             }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Falha ao tentar conectar com o BD!\n" + ex.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Falha geral do sistema!");
+            }
+            finally
+            {
+                if(con.State == ConnectionState.Open)
+                    con.Close();
+            }
 
 
             //habilita/desabilita controles
@@ -148,6 +183,42 @@ namespace BD
         private void cmdExcluir(object sender, EventArgs e)
         {
             //procedimento para excluir registro corrente
+            SqlConnection con = new SqlConnection();
+            int linhasAfetadas = 0;
+            try
+            {
+                //Lê a string de conexão do arquivo de configuração da aplicação, App.config
+                String conString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                con.ConnectionString=conString;
+                    //procedimento de persistência em BD
+                    string deleteSql = String.Format("DELETE FROM Cliente WHERE idCliente = @ID ");
+                    con.Open(); // tenta abrir a conexão
+                    SqlCommand cmd = new SqlCommand(deleteSql, con);
+                    cmd.Parameters.Add(new SqlParameter("ID", idCliente.Text));
+                    linhasAfetadas = cmd.ExecuteNonQuery();
+                    if (linhasAfetadas > 0)
+                        MessageBox.Show("Dados excluidos com sucesso!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Falha ao excluir dados!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
+                    con.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Falha ao tentar conectar com o BD!\n" + ex.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Falha geral do sistema!");
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                    con.Close();
+            }
+
+            //habilita/desabilita controles
+            modo = 0; //sai do modo atual
+            habilitar();
         }
 
         private void cmdNovo(object sender, EventArgs e)
