@@ -143,9 +143,9 @@ namespace BD
                                     "WHERE idCliente = @ID ");
                 con.Open(); // tenta abrir a conexão
                 SqlCommand cmd = new SqlCommand(updateSql, con);
-                _ = cmd.Parameters.Add(new SqlParameter("NOME", txtNome.Text));
-                cmd.Parameters.Add(new SqlParameter("CPFCNPJ", txtCnpjCpf.Text));
-                cmd.Parameters.Add(new SqlParameter("ID", idCliente.Text));
+                cmd.Parameters.AddWithValue("NOME", txtNome.Text);
+                cmd.Parameters.AddWithValue("CPFCNPJ", txtCnpjCpf.Text);
+                cmd.Parameters.AddWithValue("ID", idCliente.Text);
 
                 linhasAfetadas = cmd.ExecuteNonQuery();
                 if (linhasAfetadas > 0)
