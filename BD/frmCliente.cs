@@ -20,7 +20,7 @@ namespace BD
 
         private void habilitar()
         {
-            if(modo==0) //modo padrão
+            if (modo == 0) //modo padrão
             {
                 btnNovo.Enabled = true;
                 btnEditar.Enabled = true;
@@ -31,7 +31,8 @@ namespace BD
 
                 txtNome.Enabled = false;
                 txtCnpjCpf.Enabled = false;
-            }else if(modo == 1) //modo de inclusão de novos registros
+            }
+            else if (modo == 1) //modo de inclusão de novos registros
             {
                 btnNovo.Enabled = false;
                 btnEditar.Enabled = false;
@@ -47,7 +48,7 @@ namespace BD
 
                 txtNome.Focus(); //posiciona o cursor no campo Nome
             }
-            else if(modo == 2) //modo de edição de registros
+            else if (modo == 2) //modo de edição de registros
             {
                 btnNovo.Enabled = false;
                 btnEditar.Enabled = false;
@@ -98,7 +99,7 @@ namespace BD
             }
 
         }
- 
+
         private void cmdSelecionou(object sender, EventArgs e)
         {
             //String nome="";
@@ -110,7 +111,7 @@ namespace BD
 
             //Pesquiso o Cliente na DataTable, no DataSet, e crio uma DataRow com os 
             //dados do Cliente
-            DataRow[] clientes = dsCliente.Tables["Cliente"].Select("idCliente="+id);
+            DataRow[] clientes = dsCliente.Tables["Cliente"].Select("idCliente=" + id);
             if (clientes != null)
             {
                 Console.WriteLine("{0} - {1} - {2}", clientes[0][0], clientes[0][1], clientes[0][2]);
@@ -120,7 +121,7 @@ namespace BD
             }
         }
 
-         private void cmdEditar(object sender, EventArgs e)
+        private void cmdEditar(object sender, EventArgs e)
         {
             modo = 2; //entra em modo edição
             habilitar();
@@ -134,24 +135,24 @@ namespace BD
             try
             {
                 //Lê a string de conexão do arquivo de configuração da aplicação, App.config
-                   con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
- 
-                    //procedimento de persistência em BD
-                    string updateSql = String.Format("UPDATE Cliente SET " +
-                                        "Nome = @NOME, cpf_cnpj = @CPFCNPJ " +
-                                        "WHERE idCliente = @ID ");
-                    con.Open(); // tenta abrir a conexão
-                    SqlCommand cmd = new SqlCommand(updateSql,con);
-                    cmd.Parameters.Add(new SqlParameter("NOME", txtNome.Text));
-                    cmd.Parameters.Add(new SqlParameter("CPFCNPJ", txtCnpjCpf.Text));
-                    cmd.Parameters.Add(new SqlParameter("ID", idCliente.Text));
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
-                    linhasAfetadas = cmd.ExecuteNonQuery();
-                    if(linhasAfetadas>0) 
-                        MessageBox.Show("Dados atualizados com sucesso!","Aviso do sisema",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    else
-                        MessageBox.Show("Falha ao atualizar dados!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-             }
+                //procedimento de persistência em BD
+                string updateSql = String.Format("UPDATE Cliente SET " +
+                                    "Nome = @NOME, cpf_cnpj = @CPFCNPJ " +
+                                    "WHERE idCliente = @ID ");
+                con.Open(); // tenta abrir a conexão
+                SqlCommand cmd = new SqlCommand(updateSql, con);
+                _ = cmd.Parameters.Add(new SqlParameter("NOME", txtNome.Text));
+                cmd.Parameters.Add(new SqlParameter("CPFCNPJ", txtCnpjCpf.Text));
+                cmd.Parameters.Add(new SqlParameter("ID", idCliente.Text));
+
+                linhasAfetadas = cmd.ExecuteNonQuery();
+                if (linhasAfetadas > 0)
+                    MessageBox.Show("Dados atualizados com sucesso!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Falha ao atualizar dados!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             catch (SqlException ex)
             {
                 MessageBox.Show("Falha ao tentar conectar com o BD!\n" + ex.Message);
@@ -163,7 +164,7 @@ namespace BD
             finally
             {
                 //se a conexão estiver aberta
-                if (con.State == ConnectionState.Open) 
+                if (con.State == ConnectionState.Open)
                     con.Close();
             }
 
@@ -173,7 +174,7 @@ namespace BD
             //habilita/desabilita controles
             modo = 0; //sai do modo edição
             habilitar();
- 
+
         }
 
         private void cmdCancelar(object sender, EventArgs e)
@@ -196,18 +197,18 @@ namespace BD
             {
                 //Lê a string de conexão do arquivo de configuração da aplicação, App.config
                 String conString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                con.ConnectionString=conString;
-                    //procedimento de persistência em BD
-                    string deleteSql = String.Format("DELETE FROM Cliente WHERE idCliente = @ID ");
-                    con.Open(); // tenta abrir a conexão
-                    SqlCommand cmd = new SqlCommand(deleteSql, con);
-                    cmd.Parameters.Add(new SqlParameter("ID", idCliente.Text));
-                    linhasAfetadas = cmd.ExecuteNonQuery();
-                    if (linhasAfetadas > 0)
-                        MessageBox.Show("Dados excluidos com sucesso!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    else
-                        MessageBox.Show("Falha ao excluir dados!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
-                    con.Close();
+                con.ConnectionString = conString;
+                //procedimento de persistência em BD
+                string deleteSql = String.Format("DELETE FROM Cliente WHERE idCliente = @ID ");
+                con.Open(); // tenta abrir a conexão
+                SqlCommand cmd = new SqlCommand(deleteSql, con);
+                cmd.Parameters.Add(new SqlParameter("ID", idCliente.Text));
+                linhasAfetadas = cmd.ExecuteNonQuery();
+                if (linhasAfetadas > 0)
+                    MessageBox.Show("Dados excluidos com sucesso!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Falha ao excluir dados!", "Aviso do sisema", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
+                con.Close();
             }
             catch (SqlException ex)
             {
