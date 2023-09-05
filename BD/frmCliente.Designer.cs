@@ -29,7 +29,6 @@ namespace BD
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstClientes = new System.Windows.Forms.ListBox();
             this.grpDadosCliente = new System.Windows.Forms.GroupBox();
             this.txtCnpjCpf = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -42,19 +41,11 @@ namespace BD
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
+            this.grpLstClientes = new System.Windows.Forms.GroupBox();
+            this.lstClientes = new System.Windows.Forms.ListBox();
             this.grpDadosCliente.SuspendLayout();
+            this.grpLstClientes.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lstClientes
-            // 
-            this.lstClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstClientes.FormattingEnabled = true;
-            this.lstClientes.ItemHeight = 24;
-            this.lstClientes.Location = new System.Drawing.Point(3, 13);
-            this.lstClientes.Name = "lstClientes";
-            this.lstClientes.Size = new System.Drawing.Size(266, 172);
-            this.lstClientes.TabIndex = 1;
-            this.lstClientes.SelectedIndexChanged += new System.EventHandler(this.cmdSelecionou);
             // 
             // grpDadosCliente
             // 
@@ -65,15 +56,17 @@ namespace BD
             this.grpDadosCliente.Controls.Add(this.idCliente);
             this.grpDadosCliente.Controls.Add(this.label1);
             this.grpDadosCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.grpDadosCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpDadosCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpDadosCliente.Location = new System.Drawing.Point(275, 1);
             this.grpDadosCliente.Name = "grpDadosCliente";
-            this.grpDadosCliente.Size = new System.Drawing.Size(406, 185);
+            this.grpDadosCliente.Size = new System.Drawing.Size(404, 197);
             this.grpDadosCliente.TabIndex = 2;
             this.grpDadosCliente.TabStop = false;
+            this.grpDadosCliente.Text = "Dados Cadastrais";
             // 
             // txtCnpjCpf
             // 
+            this.txtCnpjCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCnpjCpf.ForeColor = System.Drawing.Color.Blue;
             this.txtCnpjCpf.Location = new System.Drawing.Point(11, 134);
             this.txtCnpjCpf.Name = "txtCnpjCpf";
@@ -82,6 +75,7 @@ namespace BD
             // 
             // txtNome
             // 
+            this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.ForeColor = System.Drawing.Color.Blue;
             this.txtNome.Location = new System.Drawing.Point(10, 71);
             this.txtNome.Name = "txtNome";
@@ -91,6 +85,7 @@ namespace BD
             // cnpj_cpf
             // 
             this.cnpj_cpf.AutoSize = true;
+            this.cnpj_cpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cnpj_cpf.Location = new System.Drawing.Point(6, 107);
             this.cnpj_cpf.Name = "cnpj_cpf";
             this.cnpj_cpf.Size = new System.Drawing.Size(115, 24);
@@ -100,6 +95,7 @@ namespace BD
             // Nome
             // 
             this.Nome.AutoSize = true;
+            this.Nome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nome.Location = new System.Drawing.Point(6, 44);
             this.Nome.Name = "Nome";
             this.Nome.Size = new System.Drawing.Size(67, 24);
@@ -109,6 +105,7 @@ namespace BD
             // idCliente
             // 
             this.idCliente.AutoSize = true;
+            this.idCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.idCliente.ForeColor = System.Drawing.Color.Blue;
             this.idCliente.Location = new System.Drawing.Point(129, 20);
             this.idCliente.Name = "idCliente";
@@ -118,6 +115,7 @@ namespace BD
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(7, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 24);
@@ -127,7 +125,7 @@ namespace BD
             // btnNovo
             // 
             this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNovo.Location = new System.Drawing.Point(4, 194);
+            this.btnNovo.Location = new System.Drawing.Point(11, 204);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(111, 36);
             this.btnNovo.TabIndex = 3;
@@ -138,7 +136,7 @@ namespace BD
             // btnExcluir
             // 
             this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcluir.Location = new System.Drawing.Point(239, 194);
+            this.btnExcluir.Location = new System.Drawing.Point(246, 204);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(111, 36);
             this.btnExcluir.TabIndex = 3;
@@ -149,7 +147,7 @@ namespace BD
             // btnSalvar
             // 
             this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvar.Location = new System.Drawing.Point(356, 194);
+            this.btnSalvar.Location = new System.Drawing.Point(363, 204);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(111, 36);
             this.btnSalvar.TabIndex = 3;
@@ -160,7 +158,7 @@ namespace BD
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(473, 194);
+            this.btnCancelar.Location = new System.Drawing.Point(480, 204);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(111, 36);
             this.btnCancelar.TabIndex = 3;
@@ -171,7 +169,7 @@ namespace BD
             // btnEditar
             // 
             this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(121, 194);
+            this.btnEditar.Location = new System.Drawing.Point(128, 204);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(111, 36);
             this.btnEditar.TabIndex = 3;
@@ -179,28 +177,50 @@ namespace BD
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.cmdEditar);
             // 
+            // grpLstClientes
+            // 
+            this.grpLstClientes.Controls.Add(this.lstClientes);
+            this.grpLstClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grpLstClientes.Location = new System.Drawing.Point(4, 1);
+            this.grpLstClientes.Name = "grpLstClientes";
+            this.grpLstClientes.Size = new System.Drawing.Size(265, 197);
+            this.grpLstClientes.TabIndex = 4;
+            this.grpLstClientes.TabStop = false;
+            this.grpLstClientes.Text = "Clientes";
+            // 
+            // lstClientes
+            // 
+            this.lstClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstClientes.FormattingEnabled = true;
+            this.lstClientes.ItemHeight = 24;
+            this.lstClientes.Location = new System.Drawing.Point(6, 13);
+            this.lstClientes.Name = "lstClientes";
+            this.lstClientes.Size = new System.Drawing.Size(253, 172);
+            this.lstClientes.TabIndex = 2;
+            this.lstClientes.SelectedIndexChanged += new System.EventHandler(this.cmdSelecionou);
+            // 
             // frmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 238);
+            this.ClientSize = new System.Drawing.Size(691, 251);
+            this.Controls.Add(this.grpLstClientes);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.grpDadosCliente);
-            this.Controls.Add(this.lstClientes);
             this.Name = "frmCliente";
             this.Text = "Cadastro de CLIENTES";
             this.grpDadosCliente.ResumeLayout(false);
             this.grpDadosCliente.PerformLayout();
+            this.grpLstClientes.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.ListBox lstClientes;
         private System.Windows.Forms.GroupBox grpDadosCliente;
         private System.Windows.Forms.TextBox txtCnpjCpf;
         private System.Windows.Forms.TextBox txtNome;
@@ -213,6 +233,8 @@ namespace BD
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.GroupBox grpLstClientes;
+        private System.Windows.Forms.ListBox lstClientes;
     }
 }
 

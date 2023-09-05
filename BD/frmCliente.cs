@@ -27,6 +27,7 @@ namespace BD
                 btnExcluir.Enabled = true;
                 btnSalvar.Enabled = false;
                 btnCancelar.Enabled = false;
+                grpLstClientes.Enabled = true;
 
                 txtNome.Enabled = false;
                 txtCnpjCpf.Enabled = false;
@@ -37,6 +38,7 @@ namespace BD
                 btnExcluir.Enabled = false;
                 btnSalvar.Enabled = true;
                 btnCancelar.Enabled = true;
+                grpLstClientes.Enabled = false;
 
                 txtNome.Enabled = true;
                 txtNome.Clear();
@@ -52,6 +54,8 @@ namespace BD
                 btnExcluir.Enabled = false;
                 btnSalvar.Enabled = true;
                 btnCancelar.Enabled = true;
+
+                grpLstClientes.Enabled = false;
 
                 txtNome.Enabled = true;
                 txtCnpjCpf.Enabled = true;
@@ -117,10 +121,11 @@ namespace BD
             }
         }
 
-        private void cmdEditar(object sender, EventArgs e)
+         private void cmdEditar(object sender, EventArgs e)
         {
             modo = 2; //entra em modo edição
             habilitar();
+            txtNome.DeselectAll(); //desseleciona o texto
         }
 
         private void cmdSalvar(object sender, EventArgs e)
@@ -162,6 +167,8 @@ namespace BD
                     con.Close();
             }
 
+            //atualiza lista de clientes
+            carregaListBox();
 
             //habilita/desabilita controles
             modo = 0; //sai do modo edição
@@ -215,6 +222,9 @@ namespace BD
                 if (con.State == ConnectionState.Open)
                     con.Close();
             }
+
+            //atualiza lista de clientes
+            carregaListBox();
 
             //habilita/desabilita controles
             modo = 0; //sai do modo atual
