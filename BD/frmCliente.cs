@@ -9,7 +9,7 @@ namespace BD
     public partial class frmCliente : Form
     {
         DataSet dsCliente;
-        int modo = 0; // 0 = neutro
+        int modo = 0; // 0 = neutro, 1 = inclusão, 2 = edição
 
         public frmCliente()
         {
@@ -20,7 +20,7 @@ namespace BD
 
         private void habilitar()
         {
-            if(modo==0)
+            if(modo==0) //modo padrão
             {
                 btnNovo.Enabled = true;
                 btnEditar.Enabled = true;
@@ -31,7 +31,7 @@ namespace BD
 
                 txtNome.Enabled = false;
                 txtCnpjCpf.Enabled = false;
-            }else if(modo == 1)
+            }else if(modo == 1) //modo de inclusão de novos registros
             {
                 btnNovo.Enabled = false;
                 btnEditar.Enabled = false;
@@ -47,7 +47,7 @@ namespace BD
 
                 txtNome.Focus(); //posiciona o cursor no campo Nome
             }
-            else if(modo == 2)
+            else if(modo == 2) //modo de edição de registros
             {
                 btnNovo.Enabled = false;
                 btnEditar.Enabled = false;
@@ -68,12 +68,11 @@ namespace BD
         private void carregaListBox()
         {
             String sqlSelect = "select * from Cliente";
-            SqlConnection con;
             try
             {
                 //Lê a string de conexão do arquivo de configuração da aplicação, App.config
                 String conString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                using (con = new SqlConnection(conString))
+                using (SqlConnection con = new SqlConnection(conString))
                 {
                     con.Open(); // tenta abrir a conexão
                     SqlCommand cmd = new SqlCommand(sqlSelect, con);
@@ -163,7 +162,8 @@ namespace BD
             }
             finally
             {
-                if(con.State == ConnectionState.Open)
+                //se a conexão estiver aberta
+                if (con.State == ConnectionState.Open) 
                     con.Close();
             }
 
@@ -179,7 +179,7 @@ namespace BD
         private void cmdCancelar(object sender, EventArgs e)
         {
             //procedimento para cancelar operação corrente
-
+            cmdSelecionou(null, null);
 
             //habilita/desabilita controles
             modo = 0; //sai do modo atual
