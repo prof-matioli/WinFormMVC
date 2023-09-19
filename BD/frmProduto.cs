@@ -8,13 +8,16 @@ namespace BD
 {
     public partial class frmProduto : Form
     {
-        DataSet dsProduto;
+        DatabaseManager db;
+        DataTable dtData;
         public frmProduto()
         {
             InitializeComponent();
-            carregaGridProduto();
-        }
+            db = new DatabaseManager();
 
+            //carregaGridProduto();
+        }
+/*
         private void carregaGridProduto()
         {
             String sqlSelect = "select * from Produto";
@@ -32,6 +35,7 @@ namespace BD
                     DataTable dtProduto = dsProduto.Tables["Produto"];
 
                     grdProdutos.DataSource = dtProduto;
+
                     grdProdutos.Refresh();
                  }
             }
@@ -45,6 +49,38 @@ namespace BD
             }
 
         }
+*/
+        private void frmProduto_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
 
+        private void LoadData()
+        {
+            dtData = db.FillData("SELECT * FROM Produto");
+            grdProdutos.DataSource = dtData;
+        }
+        private void UpdateData()
+        {
+            try
+            {
+                int i = db.UpdateData(dtData);
+                MessageBox.Show(i + " : registros atualizados com sucesso!");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            UpdateData();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
     }
 }
