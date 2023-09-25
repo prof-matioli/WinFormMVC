@@ -24,7 +24,7 @@ namespace BD
         public DataTable FillData(string command)
         {
             if (command.Trim().Length < 0)
-                throw new Exception("Command text is empty");
+                throw new Exception("CommandText está vazio!");
             SqlDataAdapter _ad = new SqlDataAdapter(command, conn);
             DataTable dt = new DataTable();
             if (conn.State == ConnectionState.Closed)
@@ -41,7 +41,7 @@ namespace BD
         public int UpdateData(DataTable dt)
         {
             if (adapter == null)
-                throw new Exception("Parameter adapter is null");
+                throw new Exception("Parametro adapter está null");
             return adapter.Update(dt);
         }
     }

@@ -53,6 +53,12 @@ namespace BD
         private void frmProduto_Load(object sender, EventArgs e)
         {
             LoadData();
+            grdProdutos.Columns[0].HeaderText = "ID";
+            grdProdutos.Columns[1].HeaderText = "NOME";
+            grdProdutos.Columns[2].HeaderText = "DESCRIÇÃO";
+            grdProdutos.Columns[3].HeaderText = "QUANTIDADE";
+            grdProdutos.Columns[4].HeaderText = "PREÇO";
+            grdProdutos.Columns[5].HeaderText = "UNID. MEDIDA";
         }
 
         private void LoadData()
@@ -65,11 +71,11 @@ namespace BD
             try
             {
                 int i = db.UpdateData(dtData);
-                MessageBox.Show(i + " : registros atualizados com sucesso!");
+                MessageBox.Show(i + " : registros atualizados com sucesso!","Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show(err.Message, "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -81,6 +87,16 @@ namespace BD
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void grdProdutos_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (grdProdutos.CurrentRow != null)
+            {
+                txtNome.Text = grdProdutos.CurrentRow.Cells[1].Value.ToString();
+                txtDescricao.Text = grdProdutos.CurrentRow.Cells[2].Value.ToString();
+                txtDescricao.Text = grdProdutos.CurrentRow.Cells[3].Value.ToString();
+            }
         }
     }
 }
