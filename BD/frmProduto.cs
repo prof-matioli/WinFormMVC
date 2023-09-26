@@ -53,6 +53,7 @@ namespace BD
         private void frmProduto_Load(object sender, EventArgs e)
         {
             LoadData();
+            //define o cabeçalho de cada coluna do GridView
             grdProdutos.Columns[0].HeaderText = "ID";
             grdProdutos.Columns[1].HeaderText = "NOME";
             grdProdutos.Columns[2].HeaderText = "DESCRIÇÃO";
@@ -89,14 +90,20 @@ namespace BD
             LoadData();
         }
 
-        private void grdProdutos_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void grdProdutos_SelectionChanged(object sender, EventArgs e)
         {
-            if (grdProdutos.CurrentRow != null)
-            {
-                txtNome.Text = grdProdutos.CurrentRow.Cells[1].Value.ToString();
-                txtDescricao.Text = grdProdutos.CurrentRow.Cells[2].Value.ToString();
-                txtDescricao.Text = grdProdutos.CurrentRow.Cells[3].Value.ToString();
-            }
+            DataGridView row = (DataGridView)sender;
+            if (row.CurrentRow == null)
+                return; //Or clear your TextBoxes
+            txtNome.Text = grdProdutos.CurrentRow.Cells[1].Value.ToString();
+            txtDescricao.Text = grdProdutos.CurrentRow.Cells[2].Value.ToString();
+            txtQtd.Text = grdProdutos.CurrentRow.Cells[3].Value.ToString();
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
