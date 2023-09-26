@@ -15,10 +15,10 @@ namespace BD
         {
             InitializeComponent();
             carregaListBox();
-            habilitar();
+            Habilitar();
         }
 
-        private void habilitar()
+        private void Habilitar()
         {
             if (modo == 0) //modo padrão
             {
@@ -124,7 +124,7 @@ namespace BD
         private void cmdEditar(object sender, EventArgs e)
         {
             modo = 2; //entra em modo edição
-            habilitar();
+            Habilitar();
             txtNome.DeselectAll(); //desseleciona o texto
         }
 
@@ -173,7 +173,7 @@ namespace BD
 
             //habilita/desabilita controles
             modo = 0; //sai do modo edição
-            habilitar();
+            Habilitar();
 
         }
 
@@ -184,7 +184,7 @@ namespace BD
 
             //habilita/desabilita controles
             modo = 0; //sai do modo atual
-            habilitar();
+            Habilitar();
 
         }
 
@@ -229,7 +229,7 @@ namespace BD
 
             //habilita/desabilita controles
             modo = 0; //sai do modo atual
-            habilitar();
+            Habilitar();
         }
 
         private void cmdNovo(object sender, EventArgs e)

@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Negocio;
 
 namespace BD
 {
@@ -13,6 +14,9 @@ namespace BD
         public frmProduto()
         {
             InitializeComponent();
+
+            object p = NProduto.Inserir("Melancia","Melancia rajada",330,3,"KG");
+
             db = new DatabaseManager();
 
             //carregaGridProduto();
