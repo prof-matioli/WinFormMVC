@@ -24,7 +24,7 @@ namespace Dados
 
         public DProduto(int idProduto, string nome, string descricao, float estoque, decimal preco, string unidade)
         {
-            _idProduto = idProduto;
+            IdProduto = idProduto;
             Nome = nome;
             Descricao = descricao;
             Estoque = estoque;
@@ -37,11 +37,12 @@ namespace Dados
         public float Estoque { get => _estoque; set => _estoque = value; }
         public decimal Preco { get => _preco; set => _preco = value; }
         public string Unidade { get => _unidade; set => _unidade = value; }
+        public int IdProduto { get => _idProduto; set => _idProduto = value; }
 
         public override bool Equals(object obj)
         {
             return obj is DProduto produto &&
-                   _idProduto == produto._idProduto &&
+                   IdProduto == produto.IdProduto &&
                    _nome == produto._nome &&
                    _descricao == produto._descricao &&
                    _estoque == produto._estoque &&
@@ -57,7 +58,7 @@ namespace Dados
         public override int GetHashCode()
         {
             int hashCode = -1714732673;
-            hashCode = hashCode * -1521134295 + _idProduto.GetHashCode();
+            hashCode = hashCode * -1521134295 + IdProduto.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_nome);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_descricao);
             hashCode = hashCode * -1521134295 + _estoque.GetHashCode();
@@ -75,17 +76,14 @@ namespace Dados
         public string Inserir(DProduto produto)
         {
             string resp = "";
-            SqlConnection SqlCon = new SqlConnection();
             try
             {
                 //codigo de inserção
-                String conString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-
-                SqlCon.ConnectionString = conString;
-                SqlCon.Open();
+                if (Connection.SqlCon.State == ConnectionState.Closed)
+                    Connection.SqlCon.Open();
 
                 SqlCommand SqlCmd = new SqlCommand();
-                SqlCmd.Connection = SqlCon;
+                SqlCmd.Connection = Connection.SqlCon;
                 SqlCmd.CommandText = "spInserirProduto";
                 SqlCmd.CommandType = CommandType.StoredProcedure;
 
@@ -129,7 +127,7 @@ namespace Dados
                 SqlCmd.Parameters.Add(ParUnidade);
 
                 //executa o stored procedure
-                resp = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "Registro não foi inserido";
+                resp = SqlCmd.ExecuteNonQuery() == 1 ? "SUCESSO" : "FALHA";
             }
             catch (Exception ex)
             {
@@ -137,11 +135,114 @@ namespace Dados
             }
             finally
             {
-                if (SqlCon.State == ConnectionState.Open)
-                    SqlCon.Close();
+                if (Connection.SqlCon.State == ConnectionState.Open)
+                    Connection.SqlCon.Close();
             }
             return resp;
         }
+
+        public string Editar(DProduto produto)
+        {
+            string resp = "";
+            int regsAfetados = 0;
+            try
+            {
+                //codigo de inserção
+                if (Connection.SqlCon.State == ConnectionState.Closed)
+                    Connection.SqlCon.Open();
+
+
+                SqlCommand SqlCmd = new SqlCommand();
+                SqlCmd.Connection = Connection.SqlCon;
+                SqlCmd.CommandText = "spAlterarProduto";
+                SqlCmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter ParIdProduto = new SqlParameter();
+                ParIdProduto.ParameterName = "@idProduto";
+                ParIdProduto.Direction = ParameterDirection.Output;
+                ParIdProduto.SqlDbType = SqlDbType.Int;
+                ParIdProduto.Value = produto.IdProduto;
+                SqlCmd.Parameters.Add(ParIdProduto);
+
+                SqlParameter ParRegsAfetados = new SqlParameter();
+                ParRegsAfetados.ParameterName = "@regsAfetados";
+                ParRegsAfetados.SqlDbType = SqlDbType.Int;
+                ParRegsAfetados.Direction = ParameterDirection.Output;
+                ParRegsAfetados.Value = regsAfetados;
+                SqlCmd.Parameters.Add(ParRegsAfetados);
+
+
+                SqlParameter ParNome = new SqlParameter();
+                ParNome.ParameterName = "@nome";
+                ParNome.SqlDbType = SqlDbType.VarChar;
+                ParNome.Size = 50;
+                ParNome.Value = produto.Nome;
+                SqlCmd.Parameters.Add(ParNome);
+
+                SqlParameter ParDescricao = new SqlParameter();
+                ParDescricao.ParameterName = "@descricao";
+                ParDescricao.SqlDbType = SqlDbType.VarChar;
+                ParDescricao.Size = 255;
+                ParDescricao.Value = produto.Descricao;
+                SqlCmd.Parameters.Add(ParDescricao);
+
+                SqlParameter ParEstoque = new SqlParameter();
+                ParEstoque.ParameterName = "@estoque";
+                ParEstoque.SqlDbType = SqlDbType.Float;
+                ParEstoque.Value = produto.Estoque;
+                SqlCmd.Parameters.Add(ParEstoque);
+
+                SqlParameter ParPreco = new SqlParameter();
+                ParPreco.ParameterName = "@preco";
+                ParPreco.SqlDbType = SqlDbType.Decimal;
+                ParPreco.Value = produto.Preco;
+                SqlCmd.Parameters.Add(ParPreco);
+
+                SqlParameter ParUnidade = new SqlParameter();
+                ParUnidade.ParameterName = "@unidade_medida";
+                ParUnidade.SqlDbType = SqlDbType.VarChar;
+                ParUnidade.Size = 10;
+                ParUnidade.Value = produto.Unidade;
+                SqlCmd.Parameters.Add(ParUnidade);
+
+                //executa o stored procedure
+                resp = SqlCmd.ExecuteNonQuery() == 1 ? "SUCESSO" : "FALHA";
+            }
+            catch (Exception ex)
+            {
+                resp = ex.Message;
+            }
+            finally
+            {
+                if (Connection.SqlCon.State == ConnectionState.Open)
+                    Connection.SqlCon.Close();
+            }
+            return resp;
+        }
+
+
+        //método Mostrar
+        public DataTable Mostrar()
+        {
+            DataTable DtResultado = new DataTable("produto");
+            try
+            {
+                if (Connection.SqlCon.State == ConnectionState.Closed)
+                    Connection.SqlCon.Open();
+                SqlCommand SqlCmd = new SqlCommand();
+                SqlCmd.Connection = Connection.SqlCon;
+                SqlCmd.CommandText = "spMostrarProduto";
+                SqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter SqlData = new SqlDataAdapter(SqlCmd);
+                SqlData.Fill(DtResultado);
+            }
+            catch (Exception)
+            {
+                DtResultado = null;
+            }
+            return DtResultado;
+        }
+
 
     }
 }

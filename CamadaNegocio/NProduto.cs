@@ -1,4 +1,5 @@
 ﻿using Dados;
+using System.Data;
 
 namespace Negocio
 {
@@ -15,6 +16,27 @@ namespace Negocio
             obj.Unidade = unidade;
             return obj.Inserir(obj);
         }
+
+        public static string Editar(int idCategoria, string nome, string descricao, float estoque, decimal preco, string unidade)
+        {
+            DProduto obj = new Dados.DProduto();
+            obj.IdProduto = idCategoria;
+            obj.Nome = nome;
+            obj.Descricao = descricao;
+            obj.Estoque = estoque;
+            obj.Preco = preco;
+            obj.Unidade = unidade;
+            return obj.Editar(obj);
+        }
+
+        //Método mostrar
+        public static DataTable Mostrar()
+        {
+            DProduto dProd = new DProduto();
+            DataTable dT = dProd.Mostrar();
+            return dT;
+        }
+
 
 
     }
