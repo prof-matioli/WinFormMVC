@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 using Negocio;
 
@@ -68,6 +69,7 @@ namespace BD
             modo = 0;
             habilita();
         }
+
         private void UpdateData()
         {
             int idProduto = Convert.ToInt32(grdProdutos.CurrentRow.Cells[0].Value.ToString());
@@ -76,8 +78,8 @@ namespace BD
             float estoque = float.Parse(txtQtd.Text);
             Decimal preco = Convert.ToDecimal(txtPreco.Text);
             String unidade = txtUnidade.Text;
-            string result = string.Empty;
-            String msg = string.Empty;
+            string result;
+            String msg;
 
             if (modo==1)
             {
@@ -98,7 +100,7 @@ namespace BD
                 result = NProduto.Editar(idProduto,nome,descricao,estoque,preco,unidade);
                 if (result=="SUCESSO")
                 {
-                    msg = "PRODUTO cadastrado com sucesso!";
+                    msg = "PRODUTO atualizado com sucesso!";
                     LoadData();
                 }
                 else
@@ -107,17 +109,21 @@ namespace BD
                 }
                 MessageBox.Show(msg, "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            /*
-                        try
-                        {
-                            int i = db.UpdateData(dtData);
-                            MessageBox.Show(i + " : registros atualizados com sucesso!","Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        catch (Exception err)
-                        {
-                            MessageBox.Show(err.Message, "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-            */
+            else if(modo==3)
+            {
+                result = NProduto.Excluir(idProduto);
+                if (result == "SUCESSO")
+                {
+                    msg = "PRODUTO excluido com sucesso!";
+                    LoadData();
+                }
+                else
+                {
+                    msg = "Falha ao excluir PRODUTO!";
+                }
+                MessageBox.Show(msg, "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -131,7 +137,9 @@ namespace BD
         {
             DataGridView row = (DataGridView)sender;
             if (row.CurrentRow == null)
-                return; //Or clear your TextBoxes
+                return; 
+            
+            //limpa os TextBoxes
             txtNome.Text = grdProdutos.CurrentRow.Cells[1].Value.ToString();
             txtDescricao.Text = grdProdutos.CurrentRow.Cells[2].Value.ToString();
             txtQtd.Text = grdProdutos.CurrentRow.Cells[3].Value.ToString();
@@ -161,6 +169,49 @@ namespace BD
         {
             modo = 2;
             habilita();
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            DialogResult resposta;
+            resposta = MessageBox.Show("Confirma exclusão?", "Aviso do sistema!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (resposta == DialogResult.OK)
+            {
+                modo = 3;
+                UpdateData();
+            }
+        }
+
+        private void imgFiltraNome_Click(object sender, EventArgs e)
+        {
+         }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            string filtroNome = txtFiltro.Text.Trim();
+            DataTable fltProdutos = NProduto.BuscarNome(filtroNome);
+            if (fltProdutos != null)
+            {
+                grdProdutos.DataSource = fltProdutos;
+                grdProdutos.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Nenhum regisrto encontrado!", "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            grpBotoes.Visible = true;
+
+        }
+
+        private void imgFiltraNome_Click_1(object sender, EventArgs e)
+        {
+            grpBotoes.Visible = false;
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

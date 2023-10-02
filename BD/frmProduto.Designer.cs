@@ -30,9 +30,6 @@ namespace BD
         private void InitializeComponent()
         {
             this.grdProdutos = new System.Windows.Forms.DataGridView();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnSalvar = new System.Windows.Forms.Button();
-            this.btnNovo = new System.Windows.Forms.Button();
             this.grpDados = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,10 +41,20 @@ namespace BD
             this.txtPreco = new System.Windows.Forms.TextBox();
             this.txtQtd = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
-            this.btnEditar = new System.Windows.Forms.Button();
+            this.grpBotoes = new System.Windows.Forms.GroupBox();
+            this.imgFiltraNome = new System.Windows.Forms.PictureBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnSalvar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnNovo = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutos)).BeginInit();
             this.grpDados.SuspendLayout();
+            this.grpBotoes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgFiltraNome)).BeginInit();
             this.SuspendLayout();
             // 
             // grdProdutos
@@ -55,47 +62,15 @@ namespace BD
             this.grdProdutos.AllowUserToAddRows = false;
             this.grdProdutos.AllowUserToDeleteRows = false;
             this.grdProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdProdutos.Location = new System.Drawing.Point(9, 222);
+            this.grdProdutos.Location = new System.Drawing.Point(9, 229);
             this.grdProdutos.Name = "grdProdutos";
             this.grdProdutos.ReadOnly = true;
             this.grdProdutos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.grdProdutos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.grdProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdProdutos.Size = new System.Drawing.Size(650, 278);
-            this.grdProdutos.TabIndex = 0;
+            this.grdProdutos.Size = new System.Drawing.Size(650, 271);
+            this.grdProdutos.TabIndex = 10;
             this.grdProdutos.SelectionChanged += new System.EventHandler(this.grdProdutos_SelectionChanged);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(547, 170);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(111, 36);
-            this.btnCancelar.TabIndex = 4;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvar.Location = new System.Drawing.Point(430, 170);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(111, 36);
-            this.btnSalvar.TabIndex = 5;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
-            // 
-            // btnNovo
-            // 
-            this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNovo.Location = new System.Drawing.Point(9, 169);
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(111, 36);
-            this.btnNovo.TabIndex = 8;
-            this.btnNovo.Text = "Novo";
-            this.btnNovo.UseVisualStyleBackColor = true;
-            this.btnNovo.Click += new System.EventHandler(this.btnNovoSalvar);
             // 
             // grpDados
             // 
@@ -130,7 +105,7 @@ namespace BD
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(359, 15);
+            this.label4.Location = new System.Drawing.Point(433, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 24);
             this.label4.TabIndex = 14;
@@ -140,7 +115,7 @@ namespace BD
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(511, 15);
+            this.label3.Location = new System.Drawing.Point(549, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 24);
             this.label3.TabIndex = 14;
@@ -172,8 +147,8 @@ namespace BD
             this.txtDescricao.Location = new System.Drawing.Point(6, 104);
             this.txtDescricao.Multiline = true;
             this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(488, 29);
-            this.txtDescricao.TabIndex = 11;
+            this.txtDescricao.Size = new System.Drawing.Size(492, 29);
+            this.txtDescricao.TabIndex = 3;
             // 
             // txtUnidade
             // 
@@ -182,83 +157,171 @@ namespace BD
             this.txtUnidade.MaxLength = 10;
             this.txtUnidade.Name = "txtUnidade";
             this.txtUnidade.Size = new System.Drawing.Size(128, 29);
-            this.txtUnidade.TabIndex = 12;
+            this.txtUnidade.TabIndex = 4;
             // 
             // txtPreco
             // 
             this.txtPreco.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPreco.Location = new System.Drawing.Point(363, 42);
+            this.txtPreco.Location = new System.Drawing.Point(437, 42);
             this.txtPreco.MaxLength = 18;
             this.txtPreco.Name = "txtPreco";
-            this.txtPreco.Size = new System.Drawing.Size(131, 29);
-            this.txtPreco.TabIndex = 12;
+            this.txtPreco.Size = new System.Drawing.Size(97, 29);
+            this.txtPreco.TabIndex = 1;
             // 
             // txtQtd
             // 
             this.txtQtd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQtd.Location = new System.Drawing.Point(515, 42);
+            this.txtQtd.Location = new System.Drawing.Point(553, 42);
             this.txtQtd.MaxLength = 18;
             this.txtQtd.Name = "txtQtd";
-            this.txtQtd.Size = new System.Drawing.Size(131, 29);
-            this.txtQtd.TabIndex = 12;
+            this.txtQtd.Size = new System.Drawing.Size(93, 29);
+            this.txtQtd.TabIndex = 2;
             // 
             // txtNome
             // 
             this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(6, 42);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(334, 29);
-            this.txtNome.TabIndex = 13;
+            this.txtNome.Size = new System.Drawing.Size(362, 29);
+            this.txtNome.TabIndex = 0;
             // 
-            // btnEditar
+            // grpBotoes
             // 
-            this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(126, 170);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(111, 36);
-            this.btnEditar.TabIndex = 8;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            this.grpBotoes.Controls.Add(this.btnSalvar);
+            this.grpBotoes.Controls.Add(this.imgFiltraNome);
+            this.grpBotoes.Controls.Add(this.btnCancelar);
+            this.grpBotoes.Controls.Add(this.btnExcluir);
+            this.grpBotoes.Controls.Add(this.btnEditar);
+            this.grpBotoes.Controls.Add(this.btnNovo);
+            this.grpBotoes.Location = new System.Drawing.Point(7, 160);
+            this.grpBotoes.Name = "grpBotoes";
+            this.grpBotoes.Size = new System.Drawing.Size(652, 63);
+            this.grpBotoes.TabIndex = 12;
+            this.grpBotoes.TabStop = false;
+            // 
+            // imgFiltraNome
+            // 
+            this.imgFiltraNome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgFiltraNome.Image = global::BD.Properties.Resources.search_icon_2;
+            this.imgFiltraNome.Location = new System.Drawing.Point(371, 17);
+            this.imgFiltraNome.Name = "imgFiltraNome";
+            this.imgFiltraNome.Size = new System.Drawing.Size(33, 36);
+            this.imgFiltraNome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgFiltraNome.TabIndex = 24;
+            this.imgFiltraNome.TabStop = false;
+            this.imgFiltraNome.Click += new System.EventHandler(this.imgFiltraNome_Click_1);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Location = new System.Drawing.Point(536, 17);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(111, 36);
+            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnSalvar
+            // 
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.Location = new System.Drawing.Point(419, 17);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(111, 36);
+            this.btnSalvar.TabIndex = 8;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // btnExcluir
             // 
             this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcluir.Location = new System.Drawing.Point(243, 170);
+            this.btnExcluir.Location = new System.Drawing.Point(240, 17);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(111, 36);
-            this.btnExcluir.TabIndex = 8;
+            this.btnExcluir.TabIndex = 7;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.Location = new System.Drawing.Point(123, 17);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(111, 36);
+            this.btnEditar.TabIndex = 3;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // btnNovo
+            // 
+            this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNovo.Location = new System.Drawing.Point(6, 16);
+            this.btnNovo.Name = "btnNovo";
+            this.btnNovo.Size = new System.Drawing.Size(111, 36);
+            this.btnNovo.TabIndex = 5;
+            this.btnNovo.Text = "Novo";
+            this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovoSalvar);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(14, 183);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 24);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Filtro:";
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFiltrar.Location = new System.Drawing.Point(444, 177);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(111, 36);
+            this.btnFiltrar.TabIndex = 21;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltro.Location = new System.Drawing.Point(76, 180);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(362, 29);
+            this.txtFiltro.TabIndex = 22;
             // 
             // frmProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(667, 512);
+            this.Controls.Add(this.grpBotoes);
             this.Controls.Add(this.grpDados);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnSalvar);
-            this.Controls.Add(this.btnExcluir);
-            this.Controls.Add(this.btnEditar);
-            this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.grdProdutos);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.btnFiltrar);
             this.Name = "frmProduto";
             this.Text = "Cadastro de Produtos";
             this.Load += new System.EventHandler(this.frmProduto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutos)).EndInit();
             this.grpDados.ResumeLayout(false);
             this.grpDados.PerformLayout();
+            this.grpBotoes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgFiltraNome)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView grdProdutos;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnSalvar;
-        private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.GroupBox grpDados;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -270,7 +333,15 @@ namespace BD
         private System.Windows.Forms.TextBox txtPreco;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtUnidade;
-        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.GroupBox grpBotoes;
+        private System.Windows.Forms.PictureBox imgFiltraNome;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnExcluir;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnNovo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.TextBox txtFiltro;
     }
 }

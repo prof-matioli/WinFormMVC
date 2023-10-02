@@ -144,7 +144,6 @@ namespace Dados
         public string Editar(DProduto produto)
         {
             string resp = "";
-            int regsAfetados = 0;
             try
             {
                 //codigo de inserção
@@ -159,18 +158,9 @@ namespace Dados
 
                 SqlParameter ParIdProduto = new SqlParameter();
                 ParIdProduto.ParameterName = "@idProduto";
-                ParIdProduto.Direction = ParameterDirection.Output;
                 ParIdProduto.SqlDbType = SqlDbType.Int;
                 ParIdProduto.Value = produto.IdProduto;
                 SqlCmd.Parameters.Add(ParIdProduto);
-
-                SqlParameter ParRegsAfetados = new SqlParameter();
-                ParRegsAfetados.ParameterName = "@regsAfetados";
-                ParRegsAfetados.SqlDbType = SqlDbType.Int;
-                ParRegsAfetados.Direction = ParameterDirection.Output;
-                ParRegsAfetados.Value = regsAfetados;
-                SqlCmd.Parameters.Add(ParRegsAfetados);
-
 
                 SqlParameter ParNome = new SqlParameter();
                 ParNome.ParameterName = "@nome";
@@ -218,6 +208,81 @@ namespace Dados
                     Connection.SqlCon.Close();
             }
             return resp;
+        }
+
+        //método excluir
+        public string Excluir(DProduto produto)
+        {
+            string resp = "";
+            try
+            {
+                //codigo de inserção
+                if (Connection.SqlCon.State == ConnectionState.Closed)
+                    Connection.SqlCon.Open();
+
+
+                SqlCommand SqlCmd = new SqlCommand();
+                SqlCmd.Connection = Connection.SqlCon;
+                SqlCmd.CommandText = "spExcluirProduto";
+                SqlCmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter ParIdProduto = new SqlParameter();
+                ParIdProduto.ParameterName = "@idProduto";
+                ParIdProduto.SqlDbType = SqlDbType.Int;
+                ParIdProduto.Value = produto.IdProduto;
+                SqlCmd.Parameters.Add(ParIdProduto);
+
+                //executa o stored procedure
+                resp = SqlCmd.ExecuteNonQuery() == 1 ? "SUCESSO" : "FALHA";
+            }
+            catch (Exception ex)
+            {
+                resp = ex.Message;
+            }
+            finally
+            {
+                if (Connection.SqlCon.State == ConnectionState.Open)
+                    Connection.SqlCon.Close();
+            }
+            return resp;
+        }
+
+        //método BuscarNome
+        public DataTable BuscarNome(DProduto produto)
+        {
+            DataTable dsResultado = new DataTable("produto");
+            try
+            {
+                //codigo de inserção
+                if (Connection.SqlCon.State == ConnectionState.Closed)
+                    Connection.SqlCon.Open();
+
+
+                SqlCommand SqlCmd = new SqlCommand();
+                SqlCmd.Connection = Connection.SqlCon;
+                SqlCmd.CommandText = "spBuscarProdutoPorNome";
+                SqlCmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter ParNomeProduto = new SqlParameter();
+                ParNomeProduto.ParameterName = "@nome";
+                ParNomeProduto.SqlDbType = SqlDbType.VarChar;
+                ParNomeProduto.Value = produto.Nome;
+                SqlCmd.Parameters.Add(ParNomeProduto);
+
+                SqlDataAdapter SqlData = new SqlDataAdapter(SqlCmd);
+                SqlData.Fill(dsResultado);
+            }
+            catch (Exception ex)
+            {
+                dsResultado = null;
+            }
+            finally
+            {
+                if (Connection.SqlCon.State == ConnectionState.Open)
+                    Connection.SqlCon.Close();
+
+            }
+            return dsResultado;
         }
 
 

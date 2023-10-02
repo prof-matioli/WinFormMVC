@@ -162,6 +162,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -197,6 +198,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>database.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\search-icon-2.png" />
+    <None Include="Resources\filter2.jpg" />
+    <None Include="Resources\filter.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CamadaNegocio\CamadaNegocio.csproj">

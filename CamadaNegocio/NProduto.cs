@@ -37,6 +37,21 @@ namespace Negocio
             return dT;
         }
 
+        //Método Deletar
+        public static string Excluir(int idProduto)
+        {
+            DProduto obj = new Dados.DProduto();
+            obj.IdProduto = idProduto;
+            return obj.Excluir(obj);
+        }
+
+        //Método buscar
+        public static DataTable BuscarNome(string textobuscar)
+        {
+            DProduto obj = new DProduto();
+            obj.Nome = textobuscar;
+            return obj.BuscarNome(obj);
+        }
 
 
     }
