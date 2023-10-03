@@ -205,7 +205,23 @@ namespace BD
 
         private void ImgFiltraNome_Click_1(object sender, EventArgs e)
         {
-            grpBotoes.Visible = false;
+            //grpBotoes.Visible = false;
+            using (Prompt prompt = new Prompt("Digite o Nome, ou parte dele, que deseja pesquisar. A busca será parcial, isto é, o que você digitar poderá estar em qualquer parte da frase.", "Busca por nome"))
+            {
+                string result = prompt.Result;
+                    string filtroNome = result.Trim();
+                    DataTable fltProdutos = NProduto.BuscarNome(filtroNome);
+                    if (fltProdutos != null)
+                    {
+                    grdProdutos.DataSource = fltProdutos;
+                        grdProdutos.Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nenhum regisrto encontrado!", "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    grpBotoes.Visible = true;
+            }
 
         }
 

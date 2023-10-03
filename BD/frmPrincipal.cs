@@ -5,23 +5,63 @@ namespace BD
 {
     public partial class frmPrincipal : Form
     {
+        //variáveis de instâncias dos forms
+        private FrmProduto fProduto = null;
+        private frmCliente fCliente = null;
+        private frmProdutosMySql fProdutoMySql = null;
+
         public frmPrincipal()
         {
             InitializeComponent();
         }
 
+        //Método genérico para verificar se já existe uma instância de um 
+        //dado form. Se já existir, apenas ativa ele, senão cria.
+        //O objeto que contém/conterá a instância do form e o tipo (classe) do form
+        //serão passados por parâmetros.
+        private Form ShowOrActiveForm(Form form, Type t)
+        {
+            if (form == null)
+            {
+                form = (Form)Activator.CreateInstance(t);
+                form.MdiParent = this;
+                form.Show();
+            }
+            else
+            {
+                if (form.IsDisposed)
+                {
+                    form = (Form)Activator.CreateInstance(t);
+                    form.MdiParent = this;
+                    form.Show();
+                }
+                else
+                {
+                    form.Activate();
+                }
+            }
+            return form;
+        }
+
         private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*
             frmCliente fCliente = new frmCliente();
             fCliente.MdiParent = this;
             fCliente.Show();
+            */
+            fCliente = ShowOrActiveForm(fCliente, typeof(frmCliente)) as frmCliente;
         }
 
         private void mnuProduto(object sender, EventArgs e)
         {
+            /*
             FrmProduto fProduto = new FrmProduto();
             fProduto.MdiParent = this;
             fProduto.Show();
+            */
+            fProduto= ShowOrActiveForm(fProduto, typeof(FrmProduto)) as FrmProduto;
+
         }
 
         private void frmClose(object sender, FormClosingEventArgs e)
@@ -36,9 +76,13 @@ namespace BD
 
         private void produtosMySqlToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*
             frmProdutosMySql fProdutoMySql = new frmProdutosMySql();
             fProdutoMySql.MdiParent = this;
             fProdutoMySql.Show();
+            */
+            fProdutoMySql = ShowOrActiveForm(fProdutoMySql, typeof(frmProdutosMySql)) as frmProdutosMySql;
+
         }
     }
 }
