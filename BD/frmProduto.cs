@@ -5,14 +5,14 @@ using Negocio;
 
 namespace BD
 {
-    public partial class frmProduto : Form
+    public partial class FrmProduto : Form
     {
         private int modo = 0; // 0=netro; 1=inclusao; 2=alteração; 3=exclusão
-        public frmProduto()
+        public FrmProduto()
         {
             InitializeComponent();
         }
-        private void frmProduto_Load(object sender, EventArgs e)
+        private void FrmProduto_Load(object sender, EventArgs e)
         {
             LoadData();
             //define o cabeçalho de cada coluna do GridView
@@ -24,7 +24,7 @@ namespace BD
             grdProdutos.Columns[5].HeaderText = "UNID. MEDIDA";
         }
 
-        private void habilita()
+        private void Habilita()
         {
             switch(modo)
             {
@@ -67,7 +67,7 @@ namespace BD
         {
             grdProdutos.DataSource = NProduto.Mostrar();
             modo = 0;
-            habilita();
+            Habilita();
         }
 
         private void UpdateData()
@@ -126,14 +126,14 @@ namespace BD
             }
         }
 
-        private void btnSalvar_Click(object sender, EventArgs e)
+        private void BtnSalvar_Click(object sender, EventArgs e)
         {
             UpdateData();
             modo = 0;
-            habilita();
+            Habilita();
         }
 
-        private void grdProdutos_SelectionChanged(object sender, EventArgs e)
+        private void GrdProdutos_SelectionChanged(object sender, EventArgs e)
         {
             DataGridView row = (DataGridView)sender;
             if (row.CurrentRow == null)
@@ -148,7 +148,7 @@ namespace BD
 
         }
 
-        public void limpaForm()
+        public void LimpaForm()
         {
             txtNome.Clear();
             txtDescricao.Clear();
@@ -158,20 +158,20 @@ namespace BD
             txtNome.Focus();
         }
 
-        private void btnNovoSalvar(object sender, EventArgs e)
+        private void BtnNovoSalvar(object sender, EventArgs e)
         {
             modo = 1;
-            habilita();
-            limpaForm();
+            Habilita();
+            LimpaForm();
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private void BtnEditar_Click(object sender, EventArgs e)
         {
             modo = 2;
-            habilita();
+            Habilita();
         }
 
-        private void btnExcluir_Click(object sender, EventArgs e)
+        private void BtnExcluir_Click(object sender, EventArgs e)
         {
             DialogResult resposta;
             resposta = MessageBox.Show("Confirma exclusão?", "Aviso do sistema!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -182,11 +182,11 @@ namespace BD
             }
         }
 
-        private void imgFiltraNome_Click(object sender, EventArgs e)
+        private void ImgFiltraNome_Click(object sender, EventArgs e)
         {
          }
 
-        private void btnFiltrar_Click(object sender, EventArgs e)
+        private void BtnFiltrar_Click(object sender, EventArgs e)
         {
             string filtroNome = txtFiltro.Text.Trim();
             DataTable fltProdutos = NProduto.BuscarNome(filtroNome);
@@ -203,13 +203,13 @@ namespace BD
 
         }
 
-        private void imgFiltraNome_Click_1(object sender, EventArgs e)
+        private void ImgFiltraNome_Click_1(object sender, EventArgs e)
         {
             grpBotoes.Visible = false;
 
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void BtnCancelar_Click(object sender, EventArgs e)
         {
             LoadData();
         }

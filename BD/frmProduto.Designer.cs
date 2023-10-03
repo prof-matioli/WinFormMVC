@@ -1,7 +1,7 @@
 ﻿
 namespace BD
 {
-    partial class frmProduto
+    partial class FrmProduto
     {
         /// <summary>
         /// Required designer variable.
@@ -70,7 +70,7 @@ namespace BD
             this.grdProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdProdutos.Size = new System.Drawing.Size(650, 271);
             this.grdProdutos.TabIndex = 10;
-            this.grdProdutos.SelectionChanged += new System.EventHandler(this.grdProdutos_SelectionChanged);
+            this.grdProdutos.SelectionChanged += new System.EventHandler(this.GrdProdutos_SelectionChanged);
             // 
             // grpDados
             // 
@@ -209,7 +209,7 @@ namespace BD
             this.imgFiltraNome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgFiltraNome.TabIndex = 24;
             this.imgFiltraNome.TabStop = false;
-            this.imgFiltraNome.Click += new System.EventHandler(this.imgFiltraNome_Click_1);
+            this.imgFiltraNome.Click += new System.EventHandler(this.ImgFiltraNome_Click_1);
             // 
             // btnCancelar
             // 
@@ -220,7 +220,7 @@ namespace BD
             this.btnCancelar.TabIndex = 9;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // btnSalvar
             // 
@@ -231,7 +231,7 @@ namespace BD
             this.btnSalvar.TabIndex = 8;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            this.btnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
             // 
             // btnExcluir
             // 
@@ -242,7 +242,7 @@ namespace BD
             this.btnExcluir.TabIndex = 7;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
-            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            this.btnExcluir.Click += new System.EventHandler(this.BtnExcluir_Click);
             // 
             // btnEditar
             // 
@@ -253,7 +253,7 @@ namespace BD
             this.btnEditar.TabIndex = 3;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            this.btnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
             // btnNovo
             // 
@@ -264,7 +264,7 @@ namespace BD
             this.btnNovo.TabIndex = 5;
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = true;
-            this.btnNovo.Click += new System.EventHandler(this.btnNovoSalvar);
+            this.btnNovo.Click += new System.EventHandler(this.BtnNovoSalvar);
             // 
             // label6
             // 
@@ -285,7 +285,7 @@ namespace BD
             this.btnFiltrar.TabIndex = 21;
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.UseVisualStyleBackColor = true;
-            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            this.btnFiltrar.Click += new System.EventHandler(this.BtnFiltrar_Click);
             // 
             // txtFiltro
             // 
@@ -308,7 +308,7 @@ namespace BD
             this.Controls.Add(this.btnFiltrar);
             this.Name = "frmProduto";
             this.Text = "Cadastro de Produtos";
-            this.Load += new System.EventHandler(this.frmProduto_Load);
+            this.Load += new System.EventHandler(this.FrmProduto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutos)).EndInit();
             this.grpDados.ResumeLayout(false);
             this.grpDados.PerformLayout();

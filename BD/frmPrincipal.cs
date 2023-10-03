@@ -26,7 +26,7 @@ namespace BD
 
         private void mnuProduto(object sender, EventArgs e)
         {
-            frmProduto fProduto = new frmProduto();
+            FrmProduto fProduto = new FrmProduto();
             fProduto.MdiParent = this;
             fProduto.Show();
         }
