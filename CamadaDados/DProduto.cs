@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 
 namespace Dados
@@ -82,48 +78,62 @@ namespace Dados
                 if (Connection.SqlCon.State == ConnectionState.Closed)
                     Connection.SqlCon.Open();
 
-                SqlCommand SqlCmd = new SqlCommand();
-                SqlCmd.Connection = Connection.SqlCon;
-                SqlCmd.CommandText = "spInserirProduto";
-                SqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand SqlCmd = new SqlCommand
+                {
+                    Connection = Connection.SqlCon,
+                    CommandText = "spInserirProduto",
+                    CommandType = CommandType.StoredProcedure
+                };
 
-                SqlParameter ParIdProduto = new SqlParameter();
-                ParIdProduto.ParameterName = "@idProduto";
-                ParIdProduto.SqlDbType = SqlDbType.Int;
-                ParIdProduto.Direction = ParameterDirection.Output;
-                SqlCmd.Parameters.Add(ParIdProduto);
+                SqlParameter ParIdProduto = new SqlParameter
+                {
+                    ParameterName = "@idProduto",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+                _ = SqlCmd.Parameters.Add(ParIdProduto);
 
-                SqlParameter ParNome = new SqlParameter();
-                ParNome.ParameterName = "@nome";
-                ParNome.SqlDbType = SqlDbType.VarChar;
-                ParNome.Size = 50;
-                ParNome.Value = produto.Nome;
-                SqlCmd.Parameters.Add(ParNome);
+                SqlParameter ParNome = new SqlParameter
+                {
+                    ParameterName = "@nome",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 50,
+                    Value = produto.Nome
+                };
+                _ = SqlCmd.Parameters.Add(ParNome);
 
-                SqlParameter ParDescricao = new SqlParameter();
-                ParDescricao.ParameterName = "@descricao";
-                ParDescricao.SqlDbType = SqlDbType.VarChar;
-                ParDescricao.Size = 255;
-                ParDescricao.Value = produto.Descricao;
-                SqlCmd.Parameters.Add(ParDescricao);
+                SqlParameter ParDescricao = new SqlParameter
+                {
+                    ParameterName = "@descricao",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 255,
+                    Value = produto.Descricao
+                };
+                _ = SqlCmd.Parameters.Add(ParDescricao);
 
-                SqlParameter ParEstoque = new SqlParameter();
-                ParEstoque.ParameterName = "@estoque";
-                ParEstoque.SqlDbType = SqlDbType.Float;
-                ParEstoque.Value = produto.Estoque;
-                SqlCmd.Parameters.Add(ParEstoque);
+                SqlParameter ParEstoque = new SqlParameter
+                {
+                    ParameterName = "@estoque",
+                    SqlDbType = SqlDbType.Float,
+                    Value = produto.Estoque
+                };
+                _ = SqlCmd.Parameters.Add(ParEstoque);
 
-                SqlParameter ParPreco = new SqlParameter();
-                ParPreco.ParameterName = "@preco";
-                ParPreco.SqlDbType = SqlDbType.Decimal;
-                ParPreco.Value = produto.Preco;
-                SqlCmd.Parameters.Add(ParPreco);
+                SqlParameter ParPreco = new SqlParameter
+                {
+                    ParameterName = "@preco",
+                    SqlDbType = SqlDbType.Decimal,
+                    Value = produto.Preco
+                };
+                _ = SqlCmd.Parameters.Add(ParPreco);
 
-                SqlParameter ParUnidade = new SqlParameter();
-                ParUnidade.ParameterName = "@unidade_medida";
-                ParUnidade.SqlDbType = SqlDbType.VarChar;
-                ParUnidade.Size = 10;
-                ParUnidade.Value = produto.Preco;
+                SqlParameter ParUnidade = new SqlParameter
+                {
+                    ParameterName = "@unidade_medida",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 10,
+                    Value = produto.Preco
+                };
                 SqlCmd.Parameters.Add(ParUnidade);
 
                 //executa o stored procedure
@@ -272,7 +282,7 @@ namespace Dados
                 SqlDataAdapter SqlData = new SqlDataAdapter(SqlCmd);
                 SqlData.Fill(dsResultado);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 dsResultado = null;
             }
