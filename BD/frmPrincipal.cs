@@ -8,6 +8,7 @@ namespace BD
         //variáveis de instâncias dos forms
         private FrmProduto fProduto = null;
         private frmCliente fCliente = null;
+        private frmVenda fVenda = null;
         private frmProdutosMySql fProdutoMySql = null;
 
         public frmPrincipal()
@@ -83,6 +84,11 @@ namespace BD
             */
             fProdutoMySql = ShowOrActiveForm(fProdutoMySql, typeof(frmProdutosMySql)) as frmProdutosMySql;
 
+        }
+
+        private void vendasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fVenda = ShowOrActiveForm(fVenda, typeof(frmVenda)) as frmVenda;
         }
     }
 }
