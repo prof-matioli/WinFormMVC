@@ -4,9 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dados;
+using Model;
 
-namespace Negocio
+namespace Controller
 {
     public class NVenda
     {
@@ -24,7 +24,7 @@ namespace Negocio
 
         public static string Editar(int idVenda, int idcliente, int idproduto, DateTime data, int qtd, float vlrTotal)
         {
-            DVenda obj = new Dados.DVenda();
+            DVenda obj = new DVenda();
             obj.Idcliente = idcliente;
             obj.Idproduto = idproduto;
             obj.Data = data;
@@ -44,7 +44,7 @@ namespace Negocio
         //Método Deletar
         public static string Excluir(int idVenda)
         {
-            DVenda obj = new Dados.DVenda();
+            DVenda obj = new DVenda();
             obj.Idvenda = idVenda;
             return obj.Excluir(obj);
         }

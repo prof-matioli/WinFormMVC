@@ -7,8 +7,8 @@
     <ProjectGuid>{BC3ABF62-68A8-4BCB-B4D7-25A290130B3C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Negocio</RootNamespace>
-    <AssemblyName>Negocio</AssemblyName>
+    <RootNamespace>Controller</RootNamespace>
+    <AssemblyName>Controller</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NCliente .cs" />
     <Compile Include="NProduto.cs" />
     <Compile Include="NVenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

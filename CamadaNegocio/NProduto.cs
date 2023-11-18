@@ -1,7 +1,7 @@
-﻿using Dados;
+﻿using Model;
 using System.Data;
 
-namespace Negocio
+namespace Controller
 {
     public class NProduto
     {
@@ -19,7 +19,7 @@ namespace Negocio
 
         public static string Editar(int idCategoria, string nome, string descricao, float estoque, decimal preco, string unidade)
         {
-            DProduto obj = new Dados.DProduto();
+            DProduto obj = new DProduto();
             obj.IdProduto = idCategoria;
             obj.Nome = nome;
             obj.Descricao = descricao;
@@ -40,7 +40,7 @@ namespace Negocio
         //Método Deletar
         public static string Excluir(int idProduto)
         {
-            DProduto obj = new Dados.DProduto();
+            DProduto obj = new DProduto();
             obj.IdProduto = idProduto;
             return obj.Excluir(obj);
         }
