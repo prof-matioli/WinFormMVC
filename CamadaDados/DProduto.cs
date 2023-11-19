@@ -132,7 +132,7 @@ namespace Model
                     ParameterName = "@unidade_medida",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 10,
-                    Value = produto.Preco
+                    Value = produto.Unidade
                 };
                 SqlCmd.Parameters.Add(ParUnidade);
 
