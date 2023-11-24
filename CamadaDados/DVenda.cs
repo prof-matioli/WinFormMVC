@@ -264,5 +264,27 @@ namespace Model
             return DtResultado;
         }
 
+        //método Mostrar
+        public DataTable MostrarCompleta()
+        {
+            DataTable DtResultado = new DataTable("venda");
+            try
+            {
+                if (Connection.SqlCon.State == ConnectionState.Closed)
+                    Connection.SqlCon.Open();
+                SqlCommand SqlCmd = new SqlCommand();
+                SqlCmd.Connection = Connection.SqlCon;
+                SqlCmd.CommandText = "spVendasCompleta";
+                SqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter SqlData = new SqlDataAdapter(SqlCmd);
+                SqlData.Fill(DtResultado);
+            }
+            catch (Exception)
+            {
+                DtResultado = null;
+            }
+            return DtResultado;
+        }
+
     }
 }

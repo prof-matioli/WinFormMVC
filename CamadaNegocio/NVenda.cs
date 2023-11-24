@@ -41,6 +41,15 @@ namespace Controller
             return dT;
         }
 
+        //Método mostrar completo
+        //Mostra dasdos relacionados, como Nome do Cliente e Nome do Produto
+        public static DataTable MostrarCompleta()
+        {
+            DVenda dvenda = new DVenda();
+            DataTable dT = dvenda.MostrarCompleta();
+            return dT;
+        }
+
         //Método Deletar
         public static string Excluir(int idVenda)
         {
